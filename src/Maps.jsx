@@ -42296,7 +42296,6 @@ const MapContainer = ({ geojsonData }) => {
           const crossingPoint = new Feature({
             geometry: new Point(fromLonLat([crossing.lon, crossing.lat])),
           });
-          console.log(crossingPoint);
           crossingPoint.setStyle(
             new Style({
               image: new Icon({
@@ -42308,8 +42307,173 @@ const MapContainer = ({ geojsonData }) => {
           vectorSource.addFeature(crossingPoint); // Add the bridge point to vector source
         });
       }
-    });
 
+      //dyke Curb stone (line data)
+      if (roadData.dyke_curb_stone && roadData.dyke_curb_stone.length > 0) {
+        roadData.dyke_curb_stone.forEach((dcs) => {
+          const dcsPoint = new Feature({
+            geometry: new Point(fromLonLat([dcs.start_lon, dcs.start_lat])),
+          });
+          dcsPoint.setStyle(
+            new Style({
+              image: new Icon({
+                src: Pointdata, // Use the imported image
+                scale: 1, // Optional: Adjust the size of the image
+              }),
+            })
+          );
+          vectorSource.addFeature(dcsPoint); // Add the bridge point to vector source
+          if (dcs.end_lat && dcs.end_lon) {
+            const dcsPoint = new Feature({
+              geometry: new Point(fromLonLat([dcs.end_lon, dcs.end_lat])),
+            });
+            dcsPoint.setStyle(
+              new Style({
+                image: new Icon({
+                  src: Pointdata, // Use the imported image
+                  scale: 1, // Optional: Adjust the size of the image
+                }),
+              })
+            );
+            vectorSource.addFeature(dcsPoint); // Add the bridge point to vector source
+          }
+        });
+      }
+
+      //Drainage (line data)
+      if (roadData.drainage && roadData.drainage.length > 0) {
+        roadData.drainage.forEach((drain) => {
+          const drainPoint = new Feature({
+            geometry: new Point(fromLonLat([drain.start_lon, drain.start_lat])),
+          });
+          drainPoint.setStyle(
+            new Style({
+              image: new Icon({
+                src: Pointdata, // Use the imported image
+                scale: 1, // Optional: Adjust the size of the image
+              }),
+            })
+          );
+          vectorSource.addFeature(drainPoint); // Add the bridge point to vector source
+          if (drain.end_lat && drain.end_lon) {
+            const drainPoint = new Feature({
+              geometry: new Point(fromLonLat([drain.end_lon, drain.end_lat])),
+            });
+            drainPoint.setStyle(
+              new Style({
+                image: new Icon({
+                  src: Pointdata, // Use the imported image
+                  scale: 1, // Optional: Adjust the size of the image
+                }),
+              })
+            );
+            vectorSource.addFeature(drainPoint); // Add the bridge point to vector source
+          }
+        });
+      }
+
+      //Guard rail (line data)
+      if (roadData.guard_rail && roadData.guard_rail.length > 0) {
+        roadData.guard_rail.forEach((guardRail) => {
+          const guardRailPoint = new Feature({
+            geometry: new Point(
+              fromLonLat([guardRail.start_lon, guardRail.start_lat])
+            ),
+          });
+          guardRailPoint.setStyle(
+            new Style({
+              image: new Icon({
+                src: Pointdata, // Use the imported image
+                scale: 1, // Optional: Adjust the size of the image
+              }),
+            })
+          );
+          vectorSource.addFeature(guardRailPoint); // Add the bridge point to vector source
+          if (guardRail.end_lat && guardRail.end_lon) {
+            const guardRailPoint = new Feature({
+              geometry: new Point(
+                fromLonLat([guardRail.end_lon, guardRail.end_lat])
+              ),
+            });
+            guardRailPoint.setStyle(
+              new Style({
+                image: new Icon({
+                  src: Pointdata, // Use the imported image
+                  scale: 1, // Optional: Adjust the size of the image
+                }),
+              })
+            );
+            vectorSource.addFeature(guardRailPoint); // Add the bridge point to vector source
+          }
+        });
+      }
+
+      //retaining wall (line data)
+      if (roadData.retaining_wall && roadData.retaining_wall.length > 0) {
+        roadData.retaining_wall.forEach((wall) => {
+          const wallPoint = new Feature({
+            geometry: new Point(fromLonLat([wall.start_lon, wall.start_lat])),
+          });
+          wallPoint.setStyle(
+            new Style({
+              image: new Icon({
+                src: Pointdata, // Use the imported image
+                scale: 1, // Optional: Adjust the size of the image
+              }),
+            })
+          );
+          vectorSource.addFeature(wallPoint); // Add the bridge point to vector source
+          if (wall.end_lat && wall.end_lon) {
+            const wallPoint = new Feature({
+              geometry: new Point(fromLonLat([wall.end_lon, wall.end_lat])),
+            });
+            wallPoint.setStyle(
+              new Style({
+                image: new Icon({
+                  src: Pointdata, // Use the imported image
+                  scale: 1, // Optional: Adjust the size of the image
+                }),
+              })
+            );
+            vectorSource.addFeature(wallPoint); // Add the bridge point to vector source
+          }
+        });
+      }
+
+      //tunnel (line data)
+      if (roadData.tunnel && roadData.tunnel.length > 0) {
+        roadData.tunnel.forEach((tunnel) => {
+          const tunnelPoint = new Feature({
+            geometry: new Point(
+              fromLonLat([tunnel.start_lon, tunnel.start_lat])
+            ),
+          });
+          tunnelPoint.setStyle(
+            new Style({
+              image: new Icon({
+                src: Pointdata, // Use the imported image
+                scale: 1, // Optional: Adjust the size of the image
+              }),
+            })
+          );
+          vectorSource.addFeature(tunnelPoint); // Add the bridge point to vector source
+          if (tunnel.end_lat && tunnel.end_lon) {
+            const tunnelPoint = new Feature({
+              geometry: new Point(fromLonLat([tunnel.end_lon, tunnel.end_lat])),
+            });
+            tunnelPoint.setStyle(
+              new Style({
+                image: new Icon({
+                  src: Pointdata, // Use the imported image
+                  scale: 1, // Optional: Adjust the size of the image
+                }),
+              })
+            );
+            vectorSource.addFeature(tunnelPoint); // Add the bridge point to vector source
+          }
+        });
+      }
+    });
     // You can add lines, labels, etc. based on the road data here
   };
 
